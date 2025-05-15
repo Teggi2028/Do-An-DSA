@@ -102,16 +102,20 @@ bool check_className(string className){
     if(className.find(' ') != string::npos) return false;
 
     //Kiem tra neu MSV co dung 10 ky tu
-    if(charCount != 9) return false;
+    if( charCount < 9 || charCount > 11) return false;
     
-     // 012345678 
+    // 012345678 
     //  D23CQCN03
     //Kiem tra xem tai vi tri 0, 3, 4 ,5 6 co phai la ky tu hay khong
-    int check_char[] = {0, 3, 4, 5, 6};
+    vector<int> check_char = {0, 3, 4, 5, 6};
+    for (int i = charCount - 9; i > 0; i--)
+    {
+        check_char.push_back(charCount - i - 2);
+    }
     //Kiem tra xem tai vi tri 1, 2 ,7, 8, 9 co phai la chu so hay khong
-    int check_digit[] = {1, 2, 7, 8};
+    int check_digit[] = {1, 2, charCount - 2, charCount - 1};
     for(int i = 0; i < 4; i++) if(!isdigit(className[check_digit[i]])) return false;
-    for(int i = 0; i < 5; i++) if(!isalpha(className[check_char[i]])) return false;    
+    for(int i = 0; i < check_char.size(); i++) if(!isalpha(className[check_char[i]])) return false; 
 
     return true;
 }

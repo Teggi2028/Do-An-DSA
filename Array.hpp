@@ -309,15 +309,25 @@ void max_gradeArray(){
 }
 
 void averge_gradeArray(){
-    double av = 0.0;
-    int Sv_count = List.size();
-
+    //Tao danh sach lop
+    map<string, vector<SinhVien>> ClassList;
     for(SinhVien x : List){
-        av += x.getgrade();
+        ClassList[x.getclassName()].push_back(x);
     }
-    av = av / Sv_count;
 
-    cout << "Diem trung binh cua danh sach sinh vien la " << fixed << setprecision(2) << av << endl;
+    for(pair<string, vector<SinhVien>> x  : ClassList){
+        string lop = x.first;
+        vector<SinhVien> ClassMember = x.second;
+        double av = 0.0;
+        int Sv_count = ClassMember.size();
+
+        for(SinhVien s : ClassMember){
+            av += s.getgrade();
+        }
+        av = av / Sv_count;
+        cout << "Diem trung binh cua lop " << lop << " la " << fixed << setprecision(2) << av << endl;
+    }
+
 }
 //==================SEARCH===================
 
@@ -373,6 +383,9 @@ int menu_output_search_array(){
 //====================================================================================================
 
 void search_studentId_array(){ //======================================
+     //bat dau tinh thoi gian
+     auto start = steady_clock::now();
+    
     cout << "Nhap vao MA SINH VIEN :"; string studentId; cin >> studentId; //=============================
     if(!check_studentId(studentId)){ //======================================
         cout << "Ma sinh vien khong hop le !" << endl;//===============================
@@ -418,10 +431,18 @@ void search_studentId_array(){ //======================================
     }
 
     if(count == 0) cout << "Khong tim thay thong tin can tim !" << endl;
+
+      //ket thuc tinh thoi gian 
+     auto end = steady_clock::now();
+     duration<double, std::milli> elapsed1 = end - start;
+     std::cout << "Thoi gian chuong trinh chay: " << elapsed1.count() << "ms\n";
 }
 }
 
 void search_firstName_array(){ //======================================
+     //bat dau tinh thoi gian
+     auto start = steady_clock::now();
+
     cout << "Nhap vao TEN SINH VIEN :"; string firstName; cin >> firstName; //=============================
     if(!check_firstName(firstName)){ //======================================
         cout << "Ten sinh vien khong hop le !" << endl;//===============================
@@ -468,9 +489,17 @@ void search_firstName_array(){ //======================================
 
     if(count == 0) cout << "Khong tim thay thong tin can tim !" << endl;
 }
+
+  //ket thuc tinh thoi gian 
+     auto end = steady_clock::now();
+     duration<double, std::milli> elapsed1 = end - start;
+     std::cout << "Thoi gian chuong trinh chay: " << elapsed1.count() << "ms\n";
 }
 
 void search_lastName_array(){ //======================================
+     //bat dau tinh thoi gian
+     auto start = steady_clock::now();
+    
     cout << "Nhap vao HO SINH VIEN :"; string lastName; cin.ignore(); getline(cin,lastName); //=============================
     if(!check_lastName(lastName)){ //======================================
         cout << "Ho sinh vien khong hop le !" << endl;//===============================
@@ -517,9 +546,17 @@ void search_lastName_array(){ //======================================
 
     if(count == 0) cout << "Khong tim thay thong tin can tim !" << endl;
 }
+
+  //ket thuc tinh thoi gian 
+     auto end = steady_clock::now();
+     duration<double, std::milli> elapsed1 = end - start;
+     std::cout << "Thoi gian chuong trinh chay: " << elapsed1.count() << "ms\n";
 }
 
 void search_className_array(){ //======================================
+     //bat dau tinh thoi gian
+     auto start = steady_clock::now();
+    
     cout << "Nhap vao TEN LOP CUA SINH VIEN :"; string className; cin >> className; //=============================
     if(!check_className(className)){ //======================================
         cout << "Ten lop cua sinh vien khong hop le !" << endl;//===============================
@@ -566,9 +603,17 @@ void search_className_array(){ //======================================
 
     if(count == 0) cout << "Khong tim thay thong tin can tim !" << endl;
 }
+
+  //ket thuc tinh thoi gian 
+     auto end = steady_clock::now();
+     duration<double, std::milli> elapsed1 = end - start;
+     std::cout << "Thoi gian chuong trinh chay: " << elapsed1.count() << "ms\n";
 }
 
 void search_grade_array(){ //======================================
+     //bat dau tinh thoi gian
+     auto start = steady_clock::now();
+    
     cout << "Nhap vao DIEM CUA SINH VIEN :"; double grade; cin >> grade; //=============================
     if(!check_grade(grade)){ //======================================
         cout << "Diem cua sinh vien khong hop le !" << endl;//===============================
@@ -613,6 +658,11 @@ void search_grade_array(){ //======================================
     }
 
     if(count == 0) cout << "Khong tim thay thong tin can tim !" << endl;
+
+      //ket thuc tinh thoi gian 
+     auto end = steady_clock::now();
+     duration<double, std::milli> elapsed1 = end - start;
+     std::cout << "Thoi gian chuong trinh chay: " << elapsed1.count() << "ms\n";
 }
 }
 
@@ -641,10 +691,11 @@ void menu_search_array(){
 }
 //Cau e
 void menu_grade_array(){
-    cout << "===================================================" << endl;
+    while(1){
+        cout << "===================================================" << endl;
     cout << "| Chon 1. Sinh vien co diem thap nhat             |" << endl;
     cout << "| Chon 2. Sinh Vien co diem cao nhat              |" << endl;
-    cout << "| Chon 3. Diem trung binh cua danh sach sinh vien |" << endl;
+    cout << "| Chon 3. Diem trung binh cua cac lop             |" << endl;
     cout << "| Chon 0. De tro lai menu mang                    |" << endl;
     cout << "===================================================" << endl;
     int tc; cin >> tc;
@@ -653,7 +704,8 @@ void menu_grade_array(){
     else if(tc == 2) max_gradeArray();
     else if(tc == 3) averge_gradeArray();
     else if(tc == 0) return;
-    
+    else return;
+    }
 }
 
 void menu_sorting_array(){
@@ -677,7 +729,7 @@ void menu_sorting_array(){
     else if(tc == 5) menu_heapSort_array();
     else if(tc == 6) menu_mergeSort_array();
     else if(tc == 0) return;
-    else if(tc == 0) return;
+    else return;
     }
 }
 
