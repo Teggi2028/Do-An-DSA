@@ -16,7 +16,6 @@ extern vector<SinhVien> List;
 extern char delimiter;
 extern double min_grade_array, max_grade_array;
 
-
 //========================================================================
 bool isSort(bool (*cmp) (SinhVien, SinhVien)){
     if(!check_empty_array()){
@@ -46,6 +45,13 @@ bool check_studentId_Trung_Lap(string studentId){
 void update_min_max_grade_array(){
     min_grade_array = 10.0;
     max_grade_array = 0.0;
+
+    if(List.empty()){
+        min_grade_array = 0.0;
+        max_grade_array = 0.0;
+        return;
+    }
+    
     for(SinhVien sv : List){
         min_grade_array = min(min_grade_array, sv.getgrade());
         max_grade_array = max(max_grade_array, sv.getgrade());
@@ -168,8 +174,15 @@ void insert_array(){
         return;
     }
 
-    cout << "Nhap diem cua sinh vien : "; cin >> diem;
-    cin.ignore();
+    string tmp;
+    cout << "Nhap diem cua sinh vien : "; getline(cin, tmp);
+    for(char c : tmp){
+        if(isalpha(c)){
+             cout << "Diem nhap vao khong hop le ! " << endl;
+            return;
+        }
+    }
+    diem = stod(tmp);
     if(!check_grade(diem)){
         cout << "Diem nhap vao khong hop le ! " << endl;
         return;
@@ -250,6 +263,7 @@ void update_array(){
                 return;
             }
         }
+        cout << "Cap nhat thong tin sinh vien thanh cong !" << endl;
     }
     else{
         cout << "Sinh Vien khong ton tai hoac khong trung ma so ! " << endl;
@@ -369,7 +383,7 @@ int binary_search_array(vector<SinhVien>& List, int left, int right,T x, bool (*
     else return binary_search_array(List, left, mid - 1, x, cmp_equal, cmp_less);
 }
 
-int menu_output_search_array(){
+int menu_output_search(){
     cout << "Chon 1. De in " << endl;
     cout << "Chon 2. De in nguoc" << endl;
 
@@ -393,7 +407,7 @@ void search_studentId_array(){ //======================================
     }
     studentId = Nor_studentId(studentId); //======================================
 
-    int check = menu_output_search_array();
+    int check = menu_output_search();
 
     if(isSort(cmp_studentId)){ //=================================
         int pos = binary_search_array(List, 0, List.size() - 1, studentId, cmp_equal_studentId_array, cmp_less_studentId_array); //=========================
@@ -410,6 +424,8 @@ void search_studentId_array(){ //======================================
                 else if(check == 2) output_reverseName_array_Red_Bold(List[i]);
             }
         }
+        else cout << "Khong tim thay sinh vien " << endl;
+
     } else{
         cout << "Ket qua tim kiem la : " << endl;
         int count = 0;
@@ -450,7 +466,7 @@ void search_firstName_array(){ //======================================
     }
     firstName = Nor_firstName(firstName); //======================================
 
-    int check = menu_output_search_array();
+    int check = menu_output_search();
 
     if(isSort(cmp_firstName)){ //=================================
         int pos = binary_search_array(List, 0, List.size() - 1, firstName, cmp_equal_firstName_array, cmp_less_firstName_array); //=========================
@@ -507,7 +523,7 @@ void search_lastName_array(){ //======================================
     }
     lastName = Nor_lastName(lastName); //======================================
 
-    int check = menu_output_search_array();
+    int check = menu_output_search();
 
     if(isSort(cmp_lastName)){ //=================================
         int pos = binary_search_array(List, 0, List.size() - 1, lastName, cmp_equal_lastName_array, cmp_less_lastName_array); //=========================
@@ -564,7 +580,7 @@ void search_className_array(){ //======================================
     }
     className = Nor_className(className); //======================================
 
-    int check = menu_output_search_array();
+    int check = menu_output_search();
 
     if(isSort(cmp_className)){ //=================================
         int pos = binary_search_array(List, 0, List.size() - 1, className, cmp_equal_className_array, cmp_less_className_array); //=========================
@@ -620,10 +636,10 @@ void search_grade_array(){ //======================================
         return;
     }
     
-    int check = menu_output_search_array();
+    int check = menu_output_search();
 
     if(isSort(cmp_grade)){ //=================================
-        int pos = binary_search_array(List, 0, List.size() - 1, grade, cmp_equal_grade_array, cmp_less_grade_array); //=========================
+        int pos = binary_search_array(List, 1, List.size(), grade, cmp_equal_grade_array, cmp_less_grade_array); //=========================
         if(pos != -1){
             int left = pos;
             while(left - 1 >= 0 && List[left - 1].getgrade() == grade) --left;//===========================

@@ -3,6 +3,27 @@
 
 #include <bits/stdc++.h>
 
+//==========================Greater======================
+bool cmp_studentId_greater(SinhVien a, SinhVien b){
+    return a.getstudentId() > b.getstudentId();
+}
+
+bool cmp_firstName_greater(SinhVien a, SinhVien b){
+    return a.getfirstName() > b.getfirstName();
+}
+
+bool cmp_lastName_greater(SinhVien a, SinhVien b){
+    return a.getlastName() > b.getlastName();
+}
+
+bool cmp_className_greater(SinhVien a, SinhVien b){
+    return a.getclassName() > b.getclassName();
+}
+
+bool cmp_grade_greater(SinhVien a, SinhVien b){
+    return a.getgrade() > b.getgrade();
+}
+//========================Less======================
 bool cmp_studentId(SinhVien a, SinhVien b){
     return a.getstudentId() < b.getstudentId();
 }

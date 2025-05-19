@@ -484,17 +484,17 @@ void menu_quickSort_array(){
 }
 
 //===============================HEAP SORT=====================================
-bool cmp_studentId_greater(SinhVien a, SinhVien b){
-    return a.getstudentId() > b.getstudentId();
-}
+// bool cmp_studentId_greater(SinhVien a, SinhVien b){
+//     return a.getstudentId() > b.getstudentId();
+// }
 
-bool cmp_firstName_greater(SinhVien a, SinhVien b){
-    return a.getfirstName() > b.getfirstName();
-}
+// bool cmp_firstName_greater(SinhVien a, SinhVien b){
+//     return a.getfirstName() > b.getfirstName();
+// }
 
-bool cmp_grade_greater(SinhVien a, SinhVien b){
-    return a.getgrade() > b.getgrade(   );
-}
+// bool cmp_grade_greater(SinhVien a, SinhVien b){
+//     return a.getgrade() > b.getgrade(   );
+// }
 
 void heapify_array(vector<SinhVien> &List, int n, int i, bool (*cmp) (SinhVien, SinhVien)){
     int left = 2 * i + 1;

@@ -9,6 +9,9 @@ class SinhVien{
         string studentId, lastName, firstName, className;
         double grade;
     public:
+    // Default constructor
+    SinhVien() : studentId(""), lastName(""), firstName(""), className(""), grade(0.0) {};
+
      //Constructor
      SinhVien(string id, string ho, string ten, string lop, double diem){
         studentId = id;
@@ -18,8 +21,6 @@ class SinhVien{
         grade = diem;
     }
     
-        
-
         string getstudentId(){
             return studentId;
         }
@@ -40,6 +41,20 @@ class SinhVien{
         }
 };
 
+string trim(const string& str) {
+    int first = 0;
+    while (first < str.size() && isspace(str[first])) {
+        ++first;
+    }
+
+    int last = str.size();
+    while (last > first && isspace(str[last - 1])) {
+        --last;
+    }
+
+    return str.substr(first, last - first);
+}
+
 bool cmp_SinhVien(SinhVien a, SinhVien b){
     return a.getstudentId() == b.getstudentId()
         && a.getlastName() == b.getlastName()
@@ -50,6 +65,7 @@ bool cmp_SinhVien(SinhVien a, SinhVien b){
 
 //Ham check am so Sinh Vien
 bool check_studentId(string studentId){
+    studentId = trim(studentId);
     //so luong ky tu cua ma sinh vien
     int charCount = studentId.size();
     
@@ -75,6 +91,7 @@ bool check_studentId(string studentId){
 
 //ham check ho cua sinh Vien
 bool check_lastName(string lastName){
+    lastName = trim(lastName);
     stringstream ss(lastName);
     string tmp = "", checked_lastName = "";
 
@@ -88,6 +105,7 @@ bool check_lastName(string lastName){
 }   
 
 bool check_firstName(string firstName){
+    firstName = trim(firstName);
     for(char c : firstName){
         if(!isalpha(c)) return false;
     }
@@ -95,6 +113,7 @@ bool check_firstName(string firstName){
 }
 
 bool check_className(string className){
+    className = trim(className);
     //so luong ky tu cua ten lop
     int charCount = className.size();
     

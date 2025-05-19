@@ -5,6 +5,7 @@
 using namespace std;
 
 string Nor_studentId(string studentId){
+    studentId = trim(studentId);
     string result = studentId;
     //viet hoa chu cai trong ma sinh vien 
     for(char &x : result){
@@ -15,6 +16,7 @@ string Nor_studentId(string studentId){
 
 //chuan hoa ho cua sinh vien
 string Nor_lastName(string lastName){
+    lastName = trim(lastName);
     stringstream ss(lastName);
     string tmp = "", res = "";
     
@@ -33,6 +35,8 @@ string Nor_lastName(string lastName){
 }
 
 string Nor_firstName(string firstName){
+    firstName = trim(firstName);
+
     string tmp = firstName;
     tmp[0] = toupper(tmp[0]);
 
@@ -44,6 +48,8 @@ string Nor_firstName(string firstName){
 }
 
 string Nor_className(string className){
+    className = trim(className);
+
     string result = className;
     //viet hoa chu cai trong ma sinh vien 
     for(char &x : result){
@@ -51,3 +57,4 @@ string Nor_className(string className){
     }
     return result;
 }
+
